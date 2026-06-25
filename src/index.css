@@ -1,0 +1,288 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-heading: 'Outfit', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* Light Theme (Default) */
+    --bg-app: #fbfbfb;
+    --bg-sidebar: #f3f3f3;
+    --bg-card: #ffffff;
+    --bg-input: #fdfdfd;
+    --border-main: #e2e2e5;
+    --text-primary: #1f1f23;
+    --text-secondary: #5f5f69;
+    --text-muted: #8e8e9c;
+    --accent: #6366f1; /* Indigo default */
+    --accent-light: rgba(99, 102, 241, 0.1);
+    --accent-hover: #4f46e5;
+    
+    font-family: var(--font-sans);
+  }
+
+  /* Dark Theme */
+  .theme-dark {
+    --bg-app: #121318;
+    --bg-sidebar: #1a1b23;
+    --bg-card: #1f202a;
+    --bg-input: #232532;
+    --border-main: #2b2d3c;
+    --text-primary: #f3f4f6;
+    --text-secondary: #9ca3af;
+    --text-muted: #6b7280;
+    --accent: #818cf8;
+    --accent-light: rgba(129, 140, 248, 0.15);
+    --accent-hover: #6366f1;
+  }
+
+  /* AMOLED Black Theme */
+  .theme-amoled {
+    --bg-app: #000000;
+    --bg-sidebar: #050505;
+    --bg-card: #0c0c0c;
+    --bg-input: #121212;
+    --border-main: #1c1c1c;
+    --text-primary: #ffffff;
+    --text-secondary: #a3a3a3;
+    --text-muted: #525252;
+    --accent: #a78bfa;
+    --accent-light: rgba(167, 139, 250, 0.15);
+    --accent-hover: #8b5cf6;
+  }
+
+  body {
+    background-color: var(--bg-app);
+    color: var(--text-primary);
+    transition: background-color 0.25s ease, color 0.25s ease;
+    overflow: hidden;
+  }
+}
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-main);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(var(--bg-card), 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-main);
+}
+
+/* Tiptap Rich Text Editor Styling overrides */
+.tiptap {
+  outline: none;
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.tiptap p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: var(--text-muted);
+  pointer-events: none;
+  height: 0;
+  font-style: italic;
+}
+
+.tiptap h1, .tiptap h2, .tiptap h3, .tiptap h4, .tiptap h5, .tiptap h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.tiptap h1 { font-size: 2.25rem; }
+.tiptap h2 { font-size: 1.875rem; }
+.tiptap h3 { font-size: 1.5rem; }
+.tiptap h4 { font-size: 1.25rem; }
+.tiptap h5 { font-size: 1.125rem; }
+.tiptap h6 { font-size: 1rem; }
+
+.tiptap ul, .tiptap ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.tiptap ul {
+  list-style-type: disc;
+}
+
+.tiptap ol {
+  list-style-type: decimal;
+}
+
+.tiptap li {
+  margin-bottom: 0.25rem;
+}
+
+.tiptap blockquote {
+  border-left: 4px solid var(--accent);
+  background: var(--accent-light);
+  padding: 0.5rem 1rem;
+  font-style: italic;
+  border-radius: 0 4px 4px 0;
+  margin: 1.5rem 0;
+}
+
+.tiptap code {
+  font-family: var(--font-mono);
+  background: var(--bg-sidebar);
+  color: var(--accent);
+  padding: 0.125rem 0.25rem;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.tiptap pre {
+  background: #1e1e24;
+  color: #abb2bf;
+  font-family: var(--font-mono);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.tiptap pre code {
+  color: inherit;
+  background: transparent;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* Checklist / Task lists */
+.tiptap ul[data-type="taskList"] {
+  list-style: none;
+  padding: 0;
+}
+
+.tiptap ul[data-type="taskList"] li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.tiptap ul[data-type="taskList"] li > label {
+  margin-right: 0.5rem;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.5rem;
+}
+
+.tiptap ul[data-type="taskList"] li > div {
+  flex: 1;
+}
+
+.tiptap ul[data-type="taskList"] input[type="checkbox"] {
+  cursor: pointer;
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--accent);
+}
+
+/* Hyperlinks */
+.tiptap a {
+  color: var(--accent);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.tiptap a:hover {
+  color: var(--accent-hover);
+}
+
+/* Table styles */
+.tiptap table {
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+.tiptap th, .tiptap td {
+  border: 1px solid var(--border-main);
+  box-sizing: border-box;
+  min-width: 1em;
+  padding: 6px 10px;
+  position: relative;
+  vertical-align: top;
+  text-align: left;
+}
+
+.tiptap th {
+  background-color: var(--bg-sidebar);
+  font-weight: bold;
+}
+
+.tiptap .selectedCell:after {
+  background: rgba(99, 102, 241, 0.1);
+  content: "";
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+}
+
+/* Horizontal Rules */
+.tiptap hr {
+  border: none;
+  border-top: 1px solid var(--border-main);
+  margin: 2rem 0;
+}
+
+/* Images & Resize */
+.tiptap img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  display: block;
+  margin: 1.5rem 0;
+}
+
+.tiptap img.ProseMirror-selectednode {
+  outline: 2px solid var(--accent);
+}
+
+/* Accent Color Styles Mapping */
+.accent-indigo { --accent: #6366f1; --accent-hover: #4f46e5; --accent-light: rgba(99, 102, 241, 0.1); }
+.accent-blue { --accent: #3b82f6; --accent-hover: #2563eb; --accent-light: rgba(59, 130, 246, 0.1); }
+.accent-emerald { --accent: #10b981; --accent-hover: #059669; --accent-light: rgba(16, 185, 129, 0.1); }
+.accent-rose { --accent: #f43f5e; --accent-hover: #e11d48; --accent-light: rgba(244, 63, 94, 0.1); }
+.accent-amber { --accent: #f59e0b; --accent-hover: #d97706; --accent-light: rgba(245, 158, 11, 0.1); }
+.accent-violet { --accent: #8b5cf6; --accent-hover: #7c3aed; --accent-light: rgba(139, 92, 246, 0.1); }
+
+/* Animation Utility */
+.page-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.99); }
+  to { opacity: 1; transform: scale(1); }
+}
